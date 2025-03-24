@@ -19,5 +19,13 @@ namespace ExpenseSolution.WebAPI.Controllers
 
             return Ok(token);
         }
+
+        [HttpPost("create")]
+        public IActionResult Create(CreateUserDTO data)
+        {
+            _userService.CreateUser(data);
+
+            return Created("User created successfully", "");
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ExpenseSolution.Models;
+﻿using ExpenseSolution.DTOs.Users;
+using ExpenseSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace ExpenseSolution.Users.Interfaces
     public interface IUserRepository
     {
         Task<UserDomain> GetByEmail(string email);
+        Task CreateUser(UserDomain user);
     }
 }
