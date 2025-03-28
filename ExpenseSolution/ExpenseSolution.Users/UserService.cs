@@ -31,7 +31,7 @@ namespace ExpenseSolution.Users
         {
             user.Password = _hash.HashPassword(user.Password);
             var u = new UserDomain(user.Name, user.Role, user.Email, user.Password);
-            await _repository.CreateUser(u);
+            await _repository.Create(u);
         }
     }
 }

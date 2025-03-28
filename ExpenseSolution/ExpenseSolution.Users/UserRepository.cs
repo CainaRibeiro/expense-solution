@@ -1,22 +1,22 @@
 ﻿using ExpenseSolution.Data;
+using ExpenseSolution.Infrastructure;
 using ExpenseSolution.Models;
 using ExpenseSolution.Users.Interfaces;
 
 namespace ExpenseSolution.Users
 {
-    public class UserRepository(AppDbContext context) : IUserRepository
+    public class UserRepository : GenericRepository<UserDomain>, IUserRepository
     {
-        private readonly AppDbContext _context = context;
+        private readonly AppDbContext _c;
 
-        public async Task CreateUser(UserDomain user)
+        public UserRepository(AppDbContext context) : base(context)
         {
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            _c = context;
         }
 
         public async Task<UserDomain> GetByEmail(string email)
         {
-            var user = await _context.Users.FindAsync(email);
+            var user = await _c.Users.FindAsync(email);
 
             return user ?? throw new Exception("User not found");
         }
