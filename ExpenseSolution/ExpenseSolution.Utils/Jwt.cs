@@ -1,5 +1,5 @@
-﻿using ExpenseSolution.DTOs.Users;
-using ExpenseSolution.Interfaces;
+﻿using ExpenseSolution.Domain;
+using ExpenseSolution.Utils.Interfaces;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
@@ -10,7 +10,6 @@ namespace ExpenseSolution.Utils
         public IDictionary<string, object> DecodeToken(string token)
         {
             IJsonSerializer serializer = new JsonNetSerializer();
-            IDateTimeProvider provider = new UtcDateTimeProvider();
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtDecoder decoder = new JwtDecoder(serializer, urlEncoder);
 
@@ -18,13 +17,13 @@ namespace ExpenseSolution.Utils
             return payload;
         }
 
-        public string GenerateUserToken(UserTokenDTO userToken)
+        public string GenerateUserToken(int id, string email, UserRoles role)
         {
             var payload = new Dictionary<string, object>
             {
-                { "userId", userToken.Id },
-                { "username", userToken.Email },
-                { "role", userToken.Role },
+                { "userId", id },
+                { "username", email },
+                { "role", role },
                 { "exp", DateTimeOffset.UtcNow.AddDays(365).ToUnixTimeSeconds() }
             };
 

@@ -1,6 +1,4 @@
-﻿using ExpenseSolution.Enums.Users;
-
-namespace ExpenseSolution.Models
+﻿namespace ExpenseSolution.Domain
 {
     public class UserDomain(string name, UserRoles role, string email, string password)
     {

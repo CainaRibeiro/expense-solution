@@ -1,9 +1,9 @@
-﻿using ExpenseSolution.DTOs.Users;
-using ExpenseSolution.Models;
-using ExpenseSolution.Users.Interfaces;
+﻿using ExpenseSolution.Domain;
+using ExpenseSolution.Repositories.Users;
+using ExpenseSolution.Services.Users.DTOs;
 using ExpenseSolution.Utils.Interfaces;
 
-namespace ExpenseSolution.Users
+namespace ExpenseSolution.Services.Users
 {
     public class UserService(IUserRepository repository, IJwt jwt, IHash hash) : IUserService
     {
@@ -21,8 +21,7 @@ namespace ExpenseSolution.Users
                 throw new UnauthorizedAccessException("Invalid credentials");
             }
 
-            var userTokenDTO = new UserTokenDTO(user.Id, user.Role, user.Email);
-            var token = _jwt.GenerateUserToken(userTokenDTO);
+            var token = _jwt.GenerateUserToken(user.Id, user.Email, user.Role);
 
             return token;
         }

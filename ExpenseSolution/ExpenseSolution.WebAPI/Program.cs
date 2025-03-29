@@ -1,8 +1,8 @@
-using ExpenseSolution.Data;
-using ExpenseSolution.Interfaces;
-using ExpenseSolution.Users;
-using ExpenseSolution.Users.Interfaces;
+using ExpenseSolution.Repositories;
+using ExpenseSolution.Repositories.Users;
+using ExpenseSolution.Services.Users;
 using ExpenseSolution.Utils;
+using ExpenseSolution.Utils.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("BancoTeste"));
 
 // DEPENDENCY INJECTION
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IHash, Hash>();

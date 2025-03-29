@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExpenseSolution.DTOs\ExpenseSolution.DTOs.csproj" />
-    <ProjectReference Include="..\ExpenseSolution.Interfaces\ExpenseSolution.Interfaces.csproj" />
+    <ProjectReference Include="..\ExpenseSolution.Models\ExpenseSolution.Domain.csproj" />
   </ItemGroup>
 
 </Project>

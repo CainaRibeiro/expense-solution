@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExpenseSolution.Data\ExpenseSolution.Data.csproj" />
-    <ProjectReference Include="..\ExpenseSolution.Models\ExpenseSolution.Models.csproj" />
+    <ProjectReference Include="..\ExpenseSolution.Infrastructure\ExpenseSolution.Infrastructure.csproj" />
+    <ProjectReference Include="..\ExpenseSolution.Models\ExpenseSolution.Domain.csproj" />
   </ItemGroup>
 
 </Project>

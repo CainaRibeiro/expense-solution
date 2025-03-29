@@ -1,6 +1,4 @@
-﻿
-
-using ExpenseSolution.Interfaces;
+﻿using ExpenseSolution.Utils.Interfaces;
 
 namespace ExpenseSolution.Utils
 {

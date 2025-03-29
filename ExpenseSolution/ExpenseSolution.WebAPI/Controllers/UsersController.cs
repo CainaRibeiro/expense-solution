@@ -1,7 +1,5 @@
-﻿using ExpenseSolution.DTOs.Users;
-using ExpenseSolution.Users.Interfaces;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using ExpenseSolution.Services.Users;
+using ExpenseSolution.Services.Users.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseSolution.WebAPI.Controllers
@@ -15,9 +13,9 @@ namespace ExpenseSolution.WebAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login(LoginDTO data)
         {
-            var token = _userService.Authenticate(data.username, data.password);
+            var token = _userService.Authenticate(data.Username, data.Password);
 
-            return Ok(token);
+            return Ok(token.Result);
         }
 
         [HttpPost("create")]

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExpenseSolution.Models\ExpenseSolution.Domain.csproj" />
+    <ProjectReference Include="..\ExpenseSolution.Repositories\ExpenseSolution.Repositories.csproj" />
+    <ProjectReference Include="..\ExpenseSolution.Utils\ExpenseSolution.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

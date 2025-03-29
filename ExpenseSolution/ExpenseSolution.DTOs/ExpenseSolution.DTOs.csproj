@@ -16,8 +16,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ExpenseSolution.Enums\ExpenseSolution.Enums.csproj" />
-  </ItemGroup>
-
 </Project>
