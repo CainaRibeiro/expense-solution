@@ -1,4 +1,5 @@
-﻿using ExpenseSolution.Services.Users;
+﻿using ExpenseSolution.Domain.Users;
+using ExpenseSolution.Services.Users;
 using ExpenseSolution.Services.Users.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,17 +12,17 @@ namespace ExpenseSolution.WebAPI.Controllers
         private readonly IUserService _userService = userService;
 
         [HttpPost("login")]
-        public IActionResult Login(LoginDTO data)
+        public async Task<ActionResult<string>> Login(LoginDTO data)
         {
-            var token = _userService.Authenticate(data.Username, data.Password);
+            var token = await _userService.Authenticate(data.Username, data.Password);
 
-            return Ok(token.Result);
+            return Ok(token);
         }
 
         [HttpPost("create")]
-        public IActionResult Create(CreateUserDTO data)
+        public async Task<ActionResult<UserDomain>> Create(CreateUserDTO data)
         {
-            _userService.CreateUser(data);
+            await _userService.CreateUser(data);
 
             return Created("User created successfully", "");
         }
