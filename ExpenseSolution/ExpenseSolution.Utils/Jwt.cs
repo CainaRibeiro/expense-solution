@@ -1,19 +1,34 @@
-﻿using ExpenseSolution.Domain.Users;
+﻿using Azure.Identity;
+using ExpenseSolution.Domain.Users;
 using ExpenseSolution.Utils.Interfaces;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
+
 namespace ExpenseSolution.Utils
 {
     public class Jwt : IJwt
     {
+        private const string Secret = "TESTE";
+        private readonly IJwtAlgorithm _algorithm;
+        private readonly IJsonSerializer _serializer;
+        private readonly IBase64UrlEncoder _urlEncoder;
+        private readonly IDateTimeProvider _provider;
+        private readonly IJwtValidator _validator;
+
+        public Jwt()
+        {
+            _algorithm = new HMACSHA256Algorithm();
+            _serializer = new JsonNetSerializer();
+            _urlEncoder = new JwtBase64UrlEncoder();
+            _provider = new UtcDateTimeProvider();
+            _validator = new JwtValidator(_serializer, _provider);
+        }
         public IDictionary<string, object> DecodeToken(string token)
         {
-            IJsonSerializer serializer = new JsonNetSerializer();
-            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
-            IJwtDecoder decoder = new JwtDecoder(serializer, urlEncoder);
-
-            var payload = decoder.DecodeToObject<IDictionary<string, object>>(token, "TESTE");
+            IJwtDecoder decoder = new JwtDecoder(_serializer, _urlEncoder);
+            
+            var payload = decoder.DecodeToObject<IDictionary<string, object>>(token, Secret);
             return payload;
         }
 
@@ -27,14 +42,27 @@ namespace ExpenseSolution.Utils
                 { "exp", DateTimeOffset.UtcNow.AddDays(365).ToUnixTimeSeconds() }
             };
 
-            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
-            IJsonSerializer serializer = new JsonNetSerializer();
-            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
-            IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
+            IJwtEncoder encoder = new JwtEncoder(_algorithm, _serializer, _urlEncoder);
 
-            var token = encoder.Encode(payload, "TESTE");
+            var token = encoder.Encode(payload, Secret);
 
             return token;
+        }
+
+        public bool ValidateToken(string token)
+        {
+            if (string.IsNullOrWhiteSpace(token)) return false;
+
+            try
+            {
+                var payload = DecodeToken(token);
+
+                return payload.ContainsKey("userId") && payload.ContainsKey("username") && payload.ContainsKey("role");
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

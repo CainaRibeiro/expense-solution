@@ -6,5 +6,6 @@ namespace ExpenseSolution.Utils.Interfaces
     {
         string GenerateUserToken(int id, string email, UserRoles role);
         IDictionary<string, object> DecodeToken(string token);
+        bool ValidateToken(string token);
     }
 }
