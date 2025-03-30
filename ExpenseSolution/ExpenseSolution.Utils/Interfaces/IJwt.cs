@@ -1,4 +1,4 @@
-﻿using ExpenseSolution.Domain;
+﻿using ExpenseSolution.Domain.Users;
 
 namespace ExpenseSolution.Utils.Interfaces
 {

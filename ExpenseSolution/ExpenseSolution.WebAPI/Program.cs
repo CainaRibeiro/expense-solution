@@ -1,5 +1,7 @@
 using ExpenseSolution.Repositories;
+using ExpenseSolution.Repositories.Expenses;
 using ExpenseSolution.Repositories.Users;
+using ExpenseSolution.Services.Expenses;
 using ExpenseSolution.Services.Users;
 using ExpenseSolution.Utils;
 using ExpenseSolution.Utils.Interfaces;
@@ -18,8 +20,13 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDataba
 
 // DEPENDENCY INJECTION
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+// EXPENSES
+builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
+// USER
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+// UTILS
 builder.Services.AddScoped<IHash, Hash>();
 builder.Services.AddScoped<IJwt, Jwt>();
 

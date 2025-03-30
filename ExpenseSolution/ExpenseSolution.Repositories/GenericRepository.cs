@@ -34,5 +34,12 @@ namespace ExpenseSolution.Repositories
 
             return entity;
         }
+
+        public async Task<List<T>> GetAll()
+        {
+            var result = await _dbSet.ToListAsync();
+
+            return result;
+        }
     }
 }

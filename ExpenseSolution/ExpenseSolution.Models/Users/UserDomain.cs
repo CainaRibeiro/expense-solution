@@ -1,4 +1,4 @@
-﻿namespace ExpenseSolution.Domain
+﻿namespace ExpenseSolution.Domain.Users
 {
     public class UserDomain(string name, UserRoles role, string email, string password)
     {

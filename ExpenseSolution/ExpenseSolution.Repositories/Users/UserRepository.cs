@@ -1,5 +1,4 @@
-﻿
-using ExpenseSolution.Domain;
+﻿using ExpenseSolution.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseSolution.Repositories.Users

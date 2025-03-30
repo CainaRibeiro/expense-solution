@@ -1,4 +1,4 @@
-﻿using ExpenseSolution.Domain;
+﻿using ExpenseSolution.Domain.Users;
 using ExpenseSolution.Repositories.Users;
 using ExpenseSolution.Services.Users.DTOs;
 using ExpenseSolution.Utils.Interfaces;

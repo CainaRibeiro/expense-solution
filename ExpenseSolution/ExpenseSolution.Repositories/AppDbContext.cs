@@ -1,5 +1,5 @@
-﻿
-using ExpenseSolution.Domain;
+﻿using ExpenseSolution.Domain.Expenses;
+using ExpenseSolution.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 namespace ExpenseSolution.Repositories
 {
@@ -7,6 +7,7 @@ namespace ExpenseSolution.Repositories
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<UserDomain> Users { get; set; }
+        public DbSet<ExpenseDomain> Expenses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -16,6 +17,11 @@ namespace ExpenseSolution.Repositories
                 entity.Property(u => u.Name).HasMaxLength(100).IsRequired();
                 entity.Property(u => u.Email).HasMaxLength(255).IsRequired();
                 entity.Property(u => u.Password).HasMaxLength(128).IsRequired();
+            });
+
+            modelBuilder.Entity<ExpenseDomain>(entity =>
+            {
+                entity.HasKey(u => u.Id);
             });
         }
     }
