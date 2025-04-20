@@ -1,7 +1,9 @@
 using ExpenseSolution.Repositories;
 using ExpenseSolution.Repositories.Expenses;
+using ExpenseSolution.Repositories.Reports;
 using ExpenseSolution.Repositories.Users;
 using ExpenseSolution.Services.Expenses;
+using ExpenseSolution.Services.Reports;
 using ExpenseSolution.Services.Users;
 using ExpenseSolution.Utils;
 using ExpenseSolution.Utils.Interfaces;
@@ -28,6 +30,9 @@ builder.Services.AddScoped<IExpenseService, ExpenseService>();
 // USER
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+// REPORT
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<IReportService, ReportService>();
 // UTILS
 builder.Services.AddScoped<IHash, Hash>();
 builder.Services.AddScoped<IJwt, Jwt>();

@@ -4,6 +4,8 @@ using ExpenseSolution.Utils.Interfaces;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
 
 namespace ExpenseSolution.Utils
 {
@@ -26,9 +28,9 @@ namespace ExpenseSolution.Utils
         }
         public IDictionary<string, object> DecodeToken(string token)
         {
-            IJwtDecoder decoder = new JwtDecoder(_serializer, _urlEncoder);
+            IJwtDecoder decoder = new JwtDecoder(_serializer, _validator, _urlEncoder, _algorithm);
             
-            var payload = decoder.DecodeToObject<IDictionary<string, object>>(token, Secret);
+            var payload = decoder.DecodeToObject<IDictionary<string, object>>(token, Secret, verify: true);
             return payload;
         }
 
