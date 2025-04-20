@@ -1,4 +1,5 @@
 ﻿using ExpenseSolution.Domain.Expenses;
+using ExpenseSolution.Domain.Reports;
 using ExpenseSolution.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 namespace ExpenseSolution.Repositories
@@ -8,6 +9,7 @@ namespace ExpenseSolution.Repositories
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<UserDomain> Users { get; set; }
         public DbSet<ExpenseDomain> Expenses { get; set; }
+        public DbSet<ReportDomain> Reports { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +22,11 @@ namespace ExpenseSolution.Repositories
             });
 
             modelBuilder.Entity<ExpenseDomain>(entity =>
+            {
+                entity.HasKey(u => u.Id);
+            });
+
+            modelBuilder.Entity<ReportDomain>(entity =>
             {
                 entity.HasKey(u => u.Id);
             });
