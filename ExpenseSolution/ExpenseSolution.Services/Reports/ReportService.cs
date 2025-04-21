@@ -9,7 +9,7 @@ namespace ExpenseSolution.Services.Reports
         private readonly IReportRepository _repository = repository;
 
         public async Task<bool> GenerateReport(CreateReportDTO report)
-        {
+        {// BUSCAR TODOS OS EXPENSES E REFUNDS ATIVOS, NÃO PEGAR VALORES DO FRONT
             var r = new ReportDomain(report.Period, report.TotalExpenses, report.TotalRefunds);
             var result = await _repository.Create(r);
             return result != null;

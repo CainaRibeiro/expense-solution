@@ -1,8 +1,10 @@
 using ExpenseSolution.Repositories;
 using ExpenseSolution.Repositories.Expenses;
+using ExpenseSolution.Repositories.Refund;
 using ExpenseSolution.Repositories.Reports;
 using ExpenseSolution.Repositories.Users;
 using ExpenseSolution.Services.Expenses;
+using ExpenseSolution.Services.Refunds;
 using ExpenseSolution.Services.Reports;
 using ExpenseSolution.Services.Users;
 using ExpenseSolution.Utils;
@@ -21,7 +23,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // BANCO
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("BancoTeste"));
-
 // DEPENDENCY INJECTION
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 // EXPENSES
@@ -33,6 +34,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 // REPORT
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IReportService, ReportService>();
+// REFUND
+builder.Services.AddScoped<IRefundRepository, RefundRepository>();
+builder.Services.AddScoped<IRefundService, RefundService>();
 // UTILS
 builder.Services.AddScoped<IHash, Hash>();
 builder.Services.AddScoped<IJwt, Jwt>();
