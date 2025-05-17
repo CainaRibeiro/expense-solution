@@ -2,8 +2,7 @@
 {
     public class CreateReportDTO
     {
-        public DateTime Period { get; set; }
-        public decimal TotalExpenses { get; set; }
-        public decimal TotalRefunds { get; set; }
+        public DateTime StartAt { get; set; }
+        public DateTime EndAt { get; set; }
     }
 }

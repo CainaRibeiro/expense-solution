@@ -72,6 +72,18 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        builder =>
+        {
+            builder.WithOrigins("http://127.0.0.1:4200")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
+
 
 var app = builder.Build();
 
@@ -85,6 +97,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseCors("AllowFrontend");
 
 app.Use(async (context, next) =>
 {

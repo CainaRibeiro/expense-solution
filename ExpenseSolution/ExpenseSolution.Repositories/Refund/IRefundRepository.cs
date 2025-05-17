@@ -6,5 +6,6 @@ namespace ExpenseSolution.Repositories.Refund
     {
         Task<bool> UpdateStatus(int id, RefundStatusEnum status);
         Task<RefundDomain> GetByExpenseId(int ExpenseId);
+        Task<List<RefundDomain>> GetApprovedByPeriod(DateTime startAt, DateTime endAt);
     }
 }

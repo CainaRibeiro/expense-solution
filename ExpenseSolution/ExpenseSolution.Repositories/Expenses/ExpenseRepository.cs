@@ -6,6 +6,15 @@ namespace ExpenseSolution.Repositories.Expenses
     public class ExpenseRepository(AppDbContext context) : GenericRepository<ExpenseDomain>(context), IExpenseRepository
     {
         protected readonly AppDbContext _expenseContext = context;
+
+        public async Task<List<ExpenseDomain>> GetApprovedExpensesByPeriod(DateTime startAt, DateTime endAt)
+        {
+            return await _expenseContext
+                    .Expenses
+                    .Where(e => e.Status == ExpenseStatusEnum.APPROVED && (e.CreatedAt >= startAt && e.CreatedAt <= endAt))
+                    .ToListAsync();
+        }
+
         public async Task<bool> UpdateStatus(int id, ExpenseStatusEnum status)
         {
             // VERSÃO PARA BANCO REAL
@@ -19,7 +28,6 @@ namespace ExpenseSolution.Repositories.Expenses
             // VERSÃO PARA IN MEMORY
             var expense = await _expenseContext.Expenses.FirstOrDefaultAsync(e => e.Id == id);
 
-            Console.WriteLine(expense);
             if (expense == null) return false;
 
             expense.Status = status;

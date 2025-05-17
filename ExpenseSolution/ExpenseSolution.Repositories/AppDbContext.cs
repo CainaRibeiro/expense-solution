@@ -36,7 +36,7 @@ namespace ExpenseSolution.Repositories
             modelBuilder.Entity<RefundDomain>(entity =>
             {
                 entity.HasKey(u => u.Id);
-                entity.HasOne<ExpenseDomain>()
+                entity.HasOne(r => r.Expense)
                   .WithMany()
                   .HasForeignKey(r => r.ExpenseId)
                   .OnDelete(DeleteBehavior.Cascade);

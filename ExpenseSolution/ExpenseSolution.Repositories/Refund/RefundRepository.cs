@@ -7,6 +7,15 @@ namespace ExpenseSolution.Repositories.Refund
     {
         private readonly AppDbContext _refundContext = context;
 
+        public async Task<List<RefundDomain>> GetApprovedByPeriod(DateTime startAt, DateTime endAt)
+        {
+            return await _refundContext
+                    .Refunds
+                    .Include(r => r.Expense)
+                    .Where(r => r.Status == RefundStatusEnum.APPROVED && (r.RequestDate >= startAt && r.RequestDate <= endAt))
+                    .ToListAsync();
+        }
+
         public async Task<RefundDomain> GetByExpenseId(int ExpenseId)
         {
             var refund = await _refundContext.Refunds.FirstOrDefaultAsync(r => r.ExpenseId == ExpenseId);
