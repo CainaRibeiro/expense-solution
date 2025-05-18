@@ -34,5 +34,21 @@ namespace ExpenseSolution.Repositories.Expenses
 
             return await _expenseContext.SaveChangesAsync() == 1;
         }
+
+        public async Task<List<ExpenseDomain>> GetPendingExpenses()
+        {
+            return await _expenseContext
+                    .Expenses
+                    .Where(e => e.Status == ExpenseStatusEnum.PENDING)
+                    .ToListAsync();
+        }
+
+        public async Task<List<ExpenseDomain>> GetNotPendingExpenses()
+        {
+            return await _expenseContext
+                    .Expenses
+                    .Where(e => e.Status != ExpenseStatusEnum.PENDING)
+                    .ToListAsync();
+        }
     }
 }

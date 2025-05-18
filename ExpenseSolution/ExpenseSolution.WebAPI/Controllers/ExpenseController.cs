@@ -36,10 +36,30 @@ namespace ExpenseSolution.WebAPI.Controllers
             return Ok("Expense updated");
         }
 
-        [HttpGet("gettAll")]
+        [HttpGet("getAll")]
         public async Task<IActionResult> GetAllExpenses()
         {
             var expenses = await _service.GetAllExpenses();
+
+            if (expenses.Count == 0) return NotFound();
+
+            return Ok(expenses);
+        }
+
+        [HttpGet("pending")]
+        public async Task<IActionResult> GetAllPendingExpenses()
+        {
+            var expenses = await _service.GetPendingExpenses();
+
+            if (expenses.Count == 0) return NotFound();
+
+            return Ok(expenses);
+        }
+
+        [HttpGet("notPending")]
+        public async Task<IActionResult> GetAllNotPendingExpenses()
+        {
+            var expenses = await _service.GetNotPendingExpenses();
 
             if (expenses.Count == 0) return NotFound();
 

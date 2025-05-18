@@ -32,5 +32,15 @@ namespace ExpenseSolution.Services.Expenses
         {
             return await _expenseRepository.UpdateStatus(updateStatusDTO.Id, updateStatusDTO.Status);
         }
+
+        public async Task<List<ExpenseDomain>> GetPendingExpenses()
+        {
+            return await _expenseRepository.GetPendingExpenses();
+        }
+
+        public async Task<List<ExpenseDomain>> GetNotPendingExpenses()
+        {
+            return await _expenseRepository.GetNotPendingExpenses();
+        }
     }
 }

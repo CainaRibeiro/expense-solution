@@ -22,7 +22,7 @@ namespace ExpenseSolution.Services.Reports
             var totalExpenses = expenses.Aggregate(0m, (acc, curr) => acc + curr.Value);
             var refunds = await _refundRepository.GetApprovedByPeriod(report.StartAt, report.EndAt);
             var totalRefunds = refunds.Aggregate(0m, (acc, curr) => acc + curr.Expense?.Value ?? 0m);
-            var period = DateTime.Now;
+            var period = $"{report.StartAt} - {report.EndAt}";
             var r = new ReportDomain(period, totalExpenses, totalRefunds);
             var result = await _repository.Create(r);
             return result != null;

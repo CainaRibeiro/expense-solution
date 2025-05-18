@@ -8,5 +8,7 @@ namespace ExpenseSolution.Services.Expenses
         Task<bool> UpdateExpenseStatus(UpdateStatusDTO updateStatusDTO);
         Task<ExpenseDomain> RegisterExpense(RegisterExpenseDTO expenseDTO);
         Task<List<ExpenseDomain>> GetAllExpenses();
+        Task<List<ExpenseDomain>> GetNotPendingExpenses();
+        Task<List<ExpenseDomain>> GetPendingExpenses();
     }
 }

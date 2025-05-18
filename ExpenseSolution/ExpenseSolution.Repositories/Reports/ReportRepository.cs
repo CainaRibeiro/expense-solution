@@ -11,7 +11,7 @@ namespace ExpenseSolution.Repositories.Reports
         {
             return await _reportContext
                 .Reports
-                .Where(r => r.Period >= startTime && r.Period <= endTime)
+                .Where(r => r.CreatedAt >= startTime && r.CreatedAt <= endTime)
                 .ToListAsync();
         }
     }
