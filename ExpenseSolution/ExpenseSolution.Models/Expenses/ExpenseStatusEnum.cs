@@ -5,6 +5,8 @@
         PENDING,
         APPROVED,
         REJECTED,
-        REFUNDED
+        REFUNDED,
+        PENDING_REFUND_ANALYSIS,
+        REFUND_REJECTED,
     }
 }

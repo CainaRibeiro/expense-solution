@@ -47,7 +47,15 @@ namespace ExpenseSolution.Repositories.Expenses
         {
             return await _expenseContext
                     .Expenses
-                    .Where(e => e.Status != ExpenseStatusEnum.PENDING)
+                    .Where(e => e.Status != ExpenseStatusEnum.PENDING && e.Status != ExpenseStatusEnum.PENDING_REFUND_ANALYSIS)
+                    .ToListAsync();
+        }
+
+        public async Task<List<ExpenseDomain>> GetPendingRefundAnalisysExpenses()
+        {
+            return await _expenseContext
+                    .Expenses
+                    .Where(e => e.Status == ExpenseStatusEnum.PENDING_REFUND_ANALYSIS)
                     .ToListAsync();
         }
     }

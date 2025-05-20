@@ -10,5 +10,6 @@ namespace ExpenseSolution.Services.Expenses
         Task<List<ExpenseDomain>> GetAllExpenses();
         Task<List<ExpenseDomain>> GetNotPendingExpenses();
         Task<List<ExpenseDomain>> GetPendingExpenses();
+        Task<List<ExpenseDomain>> GetPendingRefundAnalisysExpenses();
     }
 }

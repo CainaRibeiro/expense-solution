@@ -8,5 +8,6 @@ namespace ExpenseSolution.Repositories.Expenses
         Task<List<ExpenseDomain>> GetApprovedExpensesByPeriod(DateTime startAt, DateTime endAt);
         Task<List<ExpenseDomain>> GetNotPendingExpenses();
         Task<List<ExpenseDomain>> GetPendingExpenses();
+        Task<List<ExpenseDomain>> GetPendingRefundAnalisysExpenses();
     }
 }

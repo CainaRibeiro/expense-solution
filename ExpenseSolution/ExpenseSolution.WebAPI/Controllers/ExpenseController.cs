@@ -65,5 +65,15 @@ namespace ExpenseSolution.WebAPI.Controllers
 
             return Ok(expenses);
         }
+
+        [HttpGet("pendingRefunding")]
+        public async Task<IActionResult> GetPendingRefundAnalisysExpenses()
+        {
+            var expenses = await _service.GetPendingRefundAnalisysExpenses();
+
+            if (expenses.Count == 0) return NotFound();
+
+            return Ok(expenses);
+        }
     }
 }

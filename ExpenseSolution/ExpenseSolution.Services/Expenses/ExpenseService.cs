@@ -42,5 +42,9 @@ namespace ExpenseSolution.Services.Expenses
         {
             return await _expenseRepository.GetNotPendingExpenses();
         }
+        public async Task<List<ExpenseDomain>> GetPendingRefundAnalisysExpenses()
+        {
+            return await _expenseRepository.GetPendingRefundAnalisysExpenses();
+        }
     }
 }

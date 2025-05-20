@@ -16,7 +16,7 @@ namespace ExpenseSolution.Services.Refunds
                 registerRefund.ExpenseId,
                 RefundStatusEnum.PENDING
                 );
-
+            await _expenseRepositoy.UpdateStatus(registerRefund.ExpenseId, Domain.Expenses.ExpenseStatusEnum.PENDING_REFUND_ANALYSIS);
             var result = await _repository.Create(refund);
             if (result == null)
             {
@@ -33,7 +33,10 @@ namespace ExpenseSolution.Services.Refunds
                 return false;
             }
 
-            await _expenseRepositoy.UpdateStatus(evaluate.ExpenseId, Domain.Expenses.ExpenseStatusEnum.REFUNDED);
+            var newStatus = evaluate.Status == RefundStatusEnum.APPROVED
+                ? Domain.Expenses.ExpenseStatusEnum.REFUNDED
+                : Domain.Expenses.ExpenseStatusEnum.REFUND_REJECTED;
+            await _expenseRepositoy.UpdateStatus(evaluate.ExpenseId, newStatus);
             return await _repository.UpdateStatus(refund.Id, evaluate.Status);
         }
 
